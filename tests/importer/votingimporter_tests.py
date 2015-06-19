@@ -1,26 +1,49 @@
-import shutil
 from nose.tools import *
 from bsAbstimmungen.importer import VotingImporter
-from bsAbstimmungen.models import create_tables
-from bsAbstimmungen.models import *
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
 from datetime import datetime
+from mock import patch
+import os
+import shutil
 
 
-def test_fetch():
-
-    engine = create_engine('sqlite:///:memory:')
-    initialize(engine)
-    create_tables(engine)
-    session = sessionmaker(bind=engine)()
-    importer = VotingImporter()
+@patch('bsAbstimmungen.importer.votingimporter.VotingScraper.find')
+@patch('bsAbstimmungen.importer.votingimporter.VotingParser.parse')
+def test_fetch(parse, find):
+    importer = VotingImporter('test_cache')
 
     f = datetime(year=2014, month=2, day=1)
     t = datetime(year=2014, month=2, day=28)
 
-    importer.fetch(session, f, t)
-    assert_equal(29, session.query(Vote).count())
+    find.return_value = [
+        'http://abstimmungen.grosserrat-basel.ch/archiv/Amtsjahr_2014-2015/'
+        '2014.02.12/Abst_0475_20140212_092150_0001_0000_ab.pdf',
+        'http://abstimmungen.grosserrat-basel.ch/archiv/Amtsjahr_2014-2015/'
+        '2014.02.12/Abst_0493_20140212_114415_0017_0000_sa.pdf']
+
+    importer.fetch(None, f, t)
+
+    # Verify the files were downloaded...
+    assert_true(
+        os.path.exists('test_cache/Abst_0475_20140212_092150_0001_0000_ab.pdf')
+    )
+    assert_true(
+        os.path.exists('test_cache/Abst_0493_20140212_114415_0017_0000_sa.pdf')
+    )
+
+    # Verify the scraper is called
+    find.assert_called_with(f, t)
+
+    # Verify the parse method was called for both
+    assert_equals(2, len(parse.mock_calls))
+    parse.assert_any_call(
+        None, 'test_cache/Abst_0493_20140212_114415_0017_0000_sa.pdf'
+    )
+    parse.assert_any_call(
+        None, 'test_cache/Abst_0475_20140212_092150_0001_0000_ab.pdf'
+    )
+
+    # Clean up...
+    shutil.rmtree('test_cache')
 
 
 def test_download():
