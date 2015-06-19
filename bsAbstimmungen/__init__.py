@@ -24,4 +24,5 @@ def setup_logging(default_path='logging.json',
     else:
         logging.basicConfig(level=default_level)
 
-setup_logging()
+if __name__ == '__main__':
+    setup_logging()
