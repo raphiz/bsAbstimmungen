@@ -1,0 +1,512 @@
+{
+    "vote" : {
+        "nr" : 147,
+        "timestamp" : "2013-06-05T09:05:18",
+        "affair" : "Mitteilungen und Genehmigung der Tagesordnung",
+        "proposal" : "Traktandierung des Resolutionsentwurfs der Regiokommission",
+        "question" : "JA heisst Traktandierung der Resolution, NEIN heisst keine Traktandierung.",
+        "type" : "Abstimmung"
+    },
+    "votings" : [
+        {
+            "name" : "Beatriz Greuter",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Sibylle Benz",
+            "fraction" : "SP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Philippe Macherel",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Dominique König",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Ursula Metzger",
+            "fraction" : "SP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Otto Schmid",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Thomas Gander",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "René Brigger",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Christophe Haller",
+            "fraction" : "FDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Ernst Mutschler",
+            "fraction" : "FDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Christoph Holenstein",
+            "fraction" : "FDP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Murat Kaya",
+            "fraction" : "FDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "David Jenny",
+            "fraction" : "FDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Patrick Hafner",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Lorenz Nägelin",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Roland Lindner",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Bruno Jagher",
+            "fraction" : "SVP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Michael Wüthrich",
+            "fraction" : "GB",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Patrizia Bernasconi",
+            "fraction" : "GB",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Elisabeth Ackermann",
+            "fraction" : "GB",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Andreas Albrecht",
+            "fraction" : "LDP",
+            "voting" : "NO"
+        },
+        {
+            "name" : "Patricia von Falkenstein",
+            "fraction" : "LDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Michael Koechlin",
+            "fraction" : "LDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Oswald Inglin",
+            "fraction" : "CVP/EVP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Lukas Engelberger",
+            "fraction" : "CVP/EVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Aeneas Wanner",
+            "fraction" : "GLP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Dieter Werthemann",
+            "fraction" : "GLP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Ruedi Rechsteiner",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Daniel Goepfert",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Tobit Schäfer",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Jörg Vitelli",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Jürg Meyer",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Brigitte Heilbronner",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Andrea Bollinger",
+            "fraction" : "SP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Toya Krummenacher",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Stephan Luethi",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Leonhard Burckhardt",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Seyit Erdogan",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Danielle Kaufmann",
+            "fraction" : "SP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Christian von Wartburg",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Sebastian Frehner",
+            "fraction" : "SVP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Alexander Gröflin",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Andreas Ungricht",
+            "fraction" : "SVP",
+            "voting" : "ABSTAIN"
+        },
+        {
+            "name" : "Joël Thüring",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Michel Rusterholtz",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Sibel Arslan",
+            "fraction" : "GB",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Brigitta Gerber",
+            "fraction" : "GB",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Anita Lachenmeier",
+            "fraction" : "GB",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Eveline Rommerskirchen",
+            "fraction" : "GB",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Nora Bertschi",
+            "fraction" : "GB",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Daniel Stolz",
+            "fraction" : "FDP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Christian Egeler",
+            "fraction" : "FDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Elias Schäfer",
+            "fraction" : "FDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Christine Wirz",
+            "fraction" : "LDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Heiner Vischer",
+            "fraction" : "LDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Thomas Müry",
+            "fraction" : "LDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Markus Lehmann",
+            "fraction" : "CVP/EVP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Helen Schai",
+            "fraction" : "CVP/EVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "André Weissen",
+            "fraction" : "CVP/EVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Emmanuel Ullmann",
+            "fraction" : "GLP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Martina Bernasconi",
+            "fraction" : "GLP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Mustafa Atici",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Tanja Soland",
+            "fraction" : "SP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Martin Lüchinger",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Gülsen Oeztürk",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Kerstin Wenk",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Atilla Toptas",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Franziska Reinhard",
+            "fraction" : "SP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Sarah Wyss",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Sabine Suter",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Daniel Jansen",
+            "fraction" : "SP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Mirjam Ballmer",
+            "fraction" : "GB",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Heidi Mück",
+            "fraction" : "GB",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Urs Müller",
+            "fraction" : "GB",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Talha Ugur Camlibel",
+            "fraction" : "GB",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Samuel Wyss",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Karl Schweizer",
+            "fraction" : "SVP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Oskar Herzig",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Toni Casagrande",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Peter Bochsler",
+            "fraction" : "FDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Urs Schweizer",
+            "fraction" : "FDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Roland Vögtli",
+            "fraction" : "FDP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Felix Eymann",
+            "fraction" : "LDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "André Auderset",
+            "fraction" : "LDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Remo Gallacchi",
+            "fraction" : "CVP/EVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Pasqualine Balmelli",
+            "fraction" : "CVP/EVP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Eric Weber",
+            "fraction" : "fraktionslos",
+            "voting" : "NO"
+        },
+        {
+            "name" : "Martin Gschwind",
+            "fraction" : "fraktionslos",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Salome Hofer",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Franziska Roth",
+            "fraction" : "SP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Eduard Rutschmann",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Heinrich Ueberwasser",
+            "fraction" : "SVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Conradin Cramer",
+            "fraction" : "LDP",
+            "voting" : "PRESIDENT"
+        },
+        {
+            "name" : "Thomas Strahm",
+            "fraction" : "LDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Andreas Zappalà",
+            "fraction" : "FDP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Annemarie Pfeifer",
+            "fraction" : "CVP/EVP",
+            "voting" : "YES"
+        },
+        {
+            "name" : "Rolf von Aarburg",
+            "fraction" : "CVP/EVP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Thomas Grossenbacher",
+            "fraction" : "GB",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Andreas Sturm",
+            "fraction" : "GLP",
+            "voting" : "AWAY"
+        },
+        {
+            "name" : "Helmut Hersberger",
+            "fraction" : "FDP",
+            "voting" : "YES"
+        }
+    ]
+}

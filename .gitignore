@@ -1,0 +1,6 @@
+/.coverage
+/info.log
+/cache/
+/test_cache/
+__pycache__
+*.pyc
