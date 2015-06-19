@@ -5,6 +5,7 @@ import json
 
 logger = logging.getLogger(__name__)
 
+__version__ = '0.1.0'
 
 def setup_logging(default_path='logging.json',
                   default_level=logging.INFO,
