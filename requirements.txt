@@ -4,3 +4,4 @@ requests==2.7.0
 beautifulsoup4==4.3.2
 peewee==2.6.1
 mysqlclient
+argh==0.26.1

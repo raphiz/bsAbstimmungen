@@ -13,7 +13,9 @@ logger = logging.getLogger(__name__)
 
 def fetch(fromDate, toDate, directory='cache'):
     scraper = VotingScraper()
+    logger.info('Searching for votes....')
     docs = scraper.find(fromDate, toDate)
+    logger.info('Found {0} votes'.format(len(docs)))
     saved = _download(docs, directory)
     parser = VotingParser()
     for current in saved:

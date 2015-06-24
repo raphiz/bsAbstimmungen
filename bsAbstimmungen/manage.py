@@ -13,16 +13,17 @@ logger = logging.getLogger(__name__)
 filename = 'data.sql'
 
 
-def import_data():
+def import_data(from_date, to_date):
     if os.path.exists(filename):
+        logger.info('Importing existing data...')
         import_dump(models.database, filename)
     else:
+        logger.info('Setting up schema....')
         models.create_tables()
 
     # Fetch the data....
-    t = datetime(year=2014, month=2, day=28)
-    f = datetime(year=2014, month=2, day=1)
-    fetch(f, t)
+    fetch(from_date, to_date)
 
     # Dump the imported data
+    logger.info('Exporting data...')
     dump_database(models.database, 'data.sql')
