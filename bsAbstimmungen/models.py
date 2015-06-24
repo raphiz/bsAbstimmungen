@@ -1,66 +1,54 @@
 import os
 import sys
-from sqlalchemy import Column, Enum, ForeignKey, Integer, String, DateTime
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+import peewee
 
-Base = declarative_base()
+database = peewee.SqliteDatabase(':memory:')
 
 
-def initialize(engine):
-    Base.metadata.bind = engine
+def create_tables():
+    database.connect()
+    database.create_tables(BaseModel.__subclasses__())
 
 
-def create_tables(engine):
-    # Create all tables in the engine.
-    Base.metadata.create_all(engine)
+class BaseModel(peewee.Model):
+    class Meta:
+        database = database
 
 
-class Fraction(Base):
+class Fraction(BaseModel):
 
-    __tablename__ = 'fraction'
-
-    id = Column(Integer, primary_key=True)
-    abbrevation = Column(String(255))
-    councillors = relationship("Councillor", backref="fraction")
+    id = peewee.PrimaryKeyField()
+    abbrevation = peewee.CharField(max_length=10)
 
 
-class Councillor(Base):
+class Councillor(BaseModel):
 
-    __tablename__ = 'councillor'
-
-    id = Column(Integer, primary_key=True)
-    fullname = Column(String(250), nullable=False)
-    firstname = Column(String(250))
-    lastname = Column(String(250))
-    fraction_id = Column(Integer, ForeignKey('fraction.id'))
-    votings = relationship("Voting", backref="councillor")
+    id = peewee.PrimaryKeyField()
+    fullname = peewee.CharField(unique=True)
+    firstname = peewee.CharField(null=True)
+    lastname = peewee.CharField(null=True)
+    fraction = peewee.ForeignKeyField(Fraction, related_name='councillors')
+    # votings = relationship("Voting", backref="councillor")
 
 
-class Vote(Base):
-    __tablename__ = 'vote'
+class Vote(BaseModel):
 
-    id = Column(Integer, primary_key=True)
-    nr = Column(Integer)
-    timestamp = Column(DateTime())
-    affair = Column(String(1024))
-    proposal = Column(String(1024))
-    question = Column(String(1024))
-    type = Column(String(100))
-    votings = relationship("Voting", backref="vote")
+    id = peewee.PrimaryKeyField()
+    nr = peewee.IntegerField()
+    timestamp = peewee.DateTimeField()
+    affair = peewee.TextField()
+    proposal = peewee.TextField()
+    question = peewee.TextField()
+    type = peewee.CharField()
 
 
-class Voting(Base):
+VOTING_TYPES = ('yes', 'no', 'abstain', 'away', 'president')
 
-    __tablename__ = 'voting'
 
-    id = Column(Integer, primary_key=True)
-    councillor_id = Column(Integer, ForeignKey('councillor.id'))
-    vote_id = Column(Integer, ForeignKey('vote.id'))
-    enum_mapping = {'J': 'YES',
-                    'N': 'NO',
-                    'E': 'ABSTAIN',
-                    'A': 'AWAY',
-                    'P': 'PRESIDENT',
-                    }
-    voting = Column(Enum('YES', 'NO', 'AWAY', 'ABSTAIN', 'PRESIDENT'))
+class Voting(BaseModel):
+    id = peewee.PrimaryKeyField()
+    councillor = peewee.ForeignKeyField(Councillor, related_name='votings')
+    vote = peewee.ForeignKeyField(Vote, related_name='votings')
+    voting = peewee.CharField(max_length=1, constraints=[
+        peewee.Check("voting in ('{0}')".format("','".join(VOTING_TYPES)))]
+    )

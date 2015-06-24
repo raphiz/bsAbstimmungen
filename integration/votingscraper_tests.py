@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-import unittest
 from nose.tools import *
 from datetime import datetime
-from bsAbstimmungen.importer import VotingScraper
+from bsAbstimmungen.importer.votingimporter import VotingScraper
+
 
 # TODO: test each sub method!
-
-
 def test_happy_path():
     t = datetime(year=2014, month=2, day=28)
     f = datetime(year=2014, month=2, day=1)

@@ -6,3 +6,4 @@ __pycache__
 *.pyc
 /.bash_history
 /.python_history
+/data.sql

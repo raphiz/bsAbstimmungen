@@ -11,502 +11,502 @@
         {
             "name" : "Beatriz Greuter",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Sibylle Benz",
             "fraction" : "SP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Philippe Macherel",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Dominique König",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Ursula Metzger",
             "fraction" : "SP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Otto Schmid",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Thomas Gander",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "René Brigger",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Christophe Haller",
             "fraction" : "FDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Ernst Mutschler",
             "fraction" : "FDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Christoph Holenstein",
             "fraction" : "FDP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Murat Kaya",
             "fraction" : "FDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "David Jenny",
             "fraction" : "FDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Patrick Hafner",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Lorenz Nägelin",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Roland Lindner",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Bruno Jagher",
             "fraction" : "SVP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Michael Wüthrich",
             "fraction" : "GB",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Patrizia Bernasconi",
             "fraction" : "GB",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Elisabeth Ackermann",
             "fraction" : "GB",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Andreas Albrecht",
             "fraction" : "LDP",
-            "voting" : "NO"
+            "voting" : "no"
         },
         {
             "name" : "Patricia von Falkenstein",
             "fraction" : "LDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Michael Koechlin",
             "fraction" : "LDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Oswald Inglin",
             "fraction" : "CVP/EVP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Lukas Engelberger",
             "fraction" : "CVP/EVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Aeneas Wanner",
             "fraction" : "GLP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Dieter Werthemann",
             "fraction" : "GLP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Ruedi Rechsteiner",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Daniel Goepfert",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Tobit Schäfer",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Jörg Vitelli",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Jürg Meyer",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Brigitte Heilbronner",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Andrea Bollinger",
             "fraction" : "SP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Toya Krummenacher",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Stephan Luethi",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Leonhard Burckhardt",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Seyit Erdogan",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Danielle Kaufmann",
             "fraction" : "SP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Christian von Wartburg",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Sebastian Frehner",
             "fraction" : "SVP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Alexander Gröflin",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Andreas Ungricht",
             "fraction" : "SVP",
-            "voting" : "ABSTAIN"
+            "voting" : "abstain"
         },
         {
             "name" : "Joël Thüring",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Michel Rusterholtz",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Sibel Arslan",
             "fraction" : "GB",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Brigitta Gerber",
             "fraction" : "GB",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Anita Lachenmeier",
             "fraction" : "GB",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Eveline Rommerskirchen",
             "fraction" : "GB",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Nora Bertschi",
             "fraction" : "GB",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Daniel Stolz",
             "fraction" : "FDP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Christian Egeler",
             "fraction" : "FDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Elias Schäfer",
             "fraction" : "FDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Christine Wirz",
             "fraction" : "LDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Heiner Vischer",
             "fraction" : "LDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Thomas Müry",
             "fraction" : "LDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Markus Lehmann",
             "fraction" : "CVP/EVP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Helen Schai",
             "fraction" : "CVP/EVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "André Weissen",
             "fraction" : "CVP/EVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Emmanuel Ullmann",
             "fraction" : "GLP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Martina Bernasconi",
             "fraction" : "GLP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Mustafa Atici",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Tanja Soland",
             "fraction" : "SP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Martin Lüchinger",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Gülsen Oeztürk",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Kerstin Wenk",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Atilla Toptas",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Franziska Reinhard",
             "fraction" : "SP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Sarah Wyss",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Sabine Suter",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Daniel Jansen",
             "fraction" : "SP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Mirjam Ballmer",
             "fraction" : "GB",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Heidi Mück",
             "fraction" : "GB",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Urs Müller",
             "fraction" : "GB",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Talha Ugur Camlibel",
             "fraction" : "GB",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Samuel Wyss",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Karl Schweizer",
             "fraction" : "SVP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Oskar Herzig",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Toni Casagrande",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Peter Bochsler",
             "fraction" : "FDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Urs Schweizer",
             "fraction" : "FDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Roland Vögtli",
             "fraction" : "FDP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Felix Eymann",
             "fraction" : "LDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "André Auderset",
             "fraction" : "LDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Remo Gallacchi",
             "fraction" : "CVP/EVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Pasqualine Balmelli",
             "fraction" : "CVP/EVP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Eric Weber",
             "fraction" : "fraktionslos",
-            "voting" : "NO"
+            "voting" : "no"
         },
         {
             "name" : "Martin Gschwind",
             "fraction" : "fraktionslos",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Salome Hofer",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Franziska Roth",
             "fraction" : "SP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Eduard Rutschmann",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Heinrich Ueberwasser",
             "fraction" : "SVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Conradin Cramer",
             "fraction" : "LDP",
-            "voting" : "PRESIDENT"
+            "voting" : "president"
         },
         {
             "name" : "Thomas Strahm",
             "fraction" : "LDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Andreas Zappalà",
             "fraction" : "FDP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Annemarie Pfeifer",
             "fraction" : "CVP/EVP",
-            "voting" : "YES"
+            "voting" : "yes"
         },
         {
             "name" : "Rolf von Aarburg",
             "fraction" : "CVP/EVP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Thomas Grossenbacher",
             "fraction" : "GB",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Andreas Sturm",
             "fraction" : "GLP",
-            "voting" : "AWAY"
+            "voting" : "away"
         },
         {
             "name" : "Helmut Hersberger",
             "fraction" : "FDP",
-            "voting" : "YES"
+            "voting" : "yes"
         }
     ]
 }

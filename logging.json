@@ -3,7 +3,7 @@
   "disable_existing_loggers": false,
   "formatters": {
     "simple": {
-      "format": "[%(asctime)s] [%(levelname)-5s] [%(pathname)s]: %(message)s"
+      "format": "[%(asctime)s] [%(levelname)-5s]: %(message)s"
     }
   },
   "handlers": {
@@ -23,6 +23,18 @@
         "encoding": "utf8"
     }
   },
+  "loggers": {
+    "requests": {
+        "level": "WARNING",
+        "handlers": ["console"],
+        "propagate": "no"
+    },
+    "peewee": {
+        "level": "WARNING",
+        "handlers": ["console"],
+        "propagate": "no"
+    }
+ },
   "root": {
     "level": "DEBUG",
     "handlers": [
