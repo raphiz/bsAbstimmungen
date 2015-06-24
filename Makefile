@@ -6,7 +6,7 @@ buildimage:
 	docker build -t raphiz/bs_abstimmungen ./
 
 # This is an alias for the dev container...
-within_docker = docker run --rm -it --name bs_abstimmungen -u user -v $(shell pwd):/src/ -e "GIT_AUTHOR_NAME=$(shell git config user.name)" -e "GIT_COMMITTER_NAME=$(shell git config user.name)" -e "EMAIL=$(shell git config user.email)" raphiz/bs_abstimmungen
+within_docker = docker run --rm -it --name bs_abstimmungen -p 8080:8080 -u user -v $(shell pwd):/src/ -e "GIT_AUTHOR_NAME=$(shell git config user.name)" -e "GIT_COMMITTER_NAME=$(shell git config user.name)" -e "EMAIL=$(shell git config user.email)" raphiz/bs_abstimmungen
 
 .PHONY: release
 release:

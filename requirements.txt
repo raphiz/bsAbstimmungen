@@ -5,3 +5,4 @@ beautifulsoup4==4.3.2
 peewee==2.6.1
 mysqlclient
 argh==0.26.1
+jinja2==2.7.3

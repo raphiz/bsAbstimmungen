@@ -2,7 +2,7 @@ import logging.config
 import logging
 import os
 import json
-from io import StringIO
+from contextlib import contextmanager
 
 
 def setup_logging(default_path='logging.json',
@@ -32,3 +32,11 @@ def dump_database(database, filename):
 def import_dump(database, filename):
     with open(filename, 'r') as f:
         database.get_cursor().executescript(f.read())
+
+
+@contextmanager
+def pushd(newDir):
+    previousDir = os.getcwd()
+    os.chdir(newDir)
+    yield
+    os.chdir(previousDir)
