@@ -10,7 +10,7 @@ from .utils import import_dump, dump_database
 
 
 logger = logging.getLogger(__name__)
-filename = 'data.sql'
+filename = 'build/data.sql'
 
 
 def import_data(from_date, to_date):
@@ -26,4 +26,4 @@ def import_data(from_date, to_date):
 
     # Dump the imported data
     logger.info('Exporting data...')
-    dump_database(models.database, 'data.sql')
+    dump_database(models.database, filename)

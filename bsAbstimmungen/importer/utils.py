@@ -51,6 +51,8 @@ def download(url, local_filename, override=False):
         for chunk in req.iter_content(chunk_size=1024):
             if chunk:
                 target.write(chunk)
+    logger.info("Downloaded file {0}"
+                .format(local_filename))
 
 
 def capture(f, *args, **kwargs):
