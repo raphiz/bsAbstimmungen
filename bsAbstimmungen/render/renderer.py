@@ -1,21 +1,31 @@
 from jinja2 import Environment, FileSystemLoader
 from ..models import *
 import os
+import shutil
 import logging
 import re
 
 logger = logging.getLogger(__name__)
 
 
+template_dir = 'templates/'
+destination_dir = 'build/site/'
+
+
 def render():
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader(template_dir))
     env.filters['toUrl'] = toUrl
+
+    # Copy resources
+    shutil.copytree(template_dir + 'assets', destination_dir + 'assets')
 
     councillors = Councillor.select()
     for councillor in councillors:
         name = 'grossraete/{0}/index'.format(toUrl(councillor.fullname))
-        render_page(env, 'councillor_details', name, councillor=councillor)
-    render_page(env, 'councillor_index', 'grossraete/index', councillors=councillors)
+        render_page(env, 'councillor_details', name, councillor=councillor, title=councillor.fullname)
+    render_page(env, 'councillor_index', 'grossraete/index', councillors=councillors, title='Grossräte')
+
+    render_page(env, 'compare', 'vergleichen/index')
 
 
 def toUrl(value):
@@ -29,7 +39,7 @@ def toUrl(value):
 
 
 def render_page(env, src, dst, **kwargs):
-    directory = 'build/site/' + os.path.dirname(dst)
+    directory = destination_dir + os.path.dirname(dst)
     if not os.path.exists(directory):
         os.makedirs(directory)
 

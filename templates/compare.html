@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% set title = 'Vergleichen' %}
+{% block body %}
+<table class='ui very padded definition comparison  table'>
+    <tr>
+    <td>
+        Was m&ouml;chtest du verleichen?
+    </td>
+    <td>
+        <div class="ui floating dropdown labeled button">
+        <span class="text">Grossrat / Fraktion auswählen...</span>
+        <div class="menu">
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input name="search" placeholder="Alle durchsuchen" type="text">
+          </div>
+          <div class="divider"></div>
+          <div class="header">
+            <i class="tags icon"></i>
+            Fraktion
+          </div>
+          <div class="item">
+            <div class="ui green empty circular label"></div>
+            Grünes Bündnis
+          </div>
+          <div class="item">
+            <div class="ui blue empty circular label"></div>
+            Liberale
+          </div>
+          <div class="header">
+            <i class="tags icon"></i>
+            Grossräte
+          </div>
+          <div class="item">
+            <img class="ui mini avatar image" src="/images/ballmer.jpg">
+            Miriam Ballmer
+          </div>
+
+      </div>
+  </td>
+    <td>
+        <div class="ui floating dropdown labeled button">
+        <span class="text">Grossrat / Fraktion auswählen...</span>
+        <div class="menu">
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input name="search" placeholder="Alle durchsuchen" type="text">
+          </div>
+          <div class="divider"></div>
+          <div class="header">
+            <i class="tags icon"></i>
+            Fraktion
+          </div>
+          <div class="item">
+            <div class="ui green empty circular label"></div>
+            Grünes Bündnis
+          </div>
+          <div class="item">
+            <div class="ui blue empty circular label"></div>
+            Liberale
+          </div>
+          <div class="header">
+            <i class="tags icon"></i>
+            Grossräte
+          </div>
+          <div class="item">
+            <img class="ui mini avatar image" src="/images/ballmer.jpg">
+            Miriam Ballmer
+          </div>
+
+        <!--
+        <select class="configuration">
+            <option selected>Aktuelle Legislatur</option>
+        </select>
+        -->
+    </td>
+</tr>
+</table>
+<h2>&Uuml;bersicht</h2>
+<table class='ui very padded definition comparison table'>
+<tr>
+    <td>Name</td>
+    <td><a href="councilor.html">Mirjam Ballmer</a></td>
+    <td></td>
+</tr>
+<tr>
+    <td>Fraktion</td>
+    <td>Grünes Bündnis Basel</td>
+    <td></td>
+</tr>
+<tr>
+    <td>Kommision</td>
+    <td>Bau- und Raumplanungskommission</td>
+    <td></td>
+</tr>
+<tr>
+    <td>Grossrat seit</td>
+    <td>2011</td>
+    <td>2015</td>
+</tr>
+<tr>
+    <td>Anwesenheit</td>
+    <td>90%</td>
+    <td></td>
+</tr>
+<tr>
+    <td>Parteitreue</td>
+    <td>90%</td>
+    <td></td>
+</tr>
+</table>
+<h2 class="options">Abstimmungsverhalten</h2>
+<div class="comparison options">
+<div class="ui toggle button">
+  Nur Unterschiede
+</div>
+</div>
+<table class='ui very padded definition comparison table'>
+<tr>
+    <td>Ratschlag Areal Bank für Internationalen Zahlungsausgleich</td>
+    <td class="no">Nein</td>
+    <td class="no">Nein</td>
+</tr>
+<tr>
+    <td>Ratschlag Areal Bank für Internationalen Zahlungsausgleich</td>
+    <td class="away">abwesend</td>
+    <td class="yes">Ja</td>
+</tr>
+<tr>
+    <td>Ratschlag Areal Bank für Internationalen Zahlungsausgleich</td>
+    <td class="undecided">enthalten</td>
+    <td class="yes">Ja</td>
+</tr>
+</table>
+{% endblock %}
+
+
+{% block footer %}
+{{ super() }}
+<script>
+    $('.ui.dropdown').dropdown();
+</script>
+{% endblock %}

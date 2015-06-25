@@ -22,16 +22,8 @@ def render():
 
 def serve():
     with utils.pushd('build/site'):
-        PORT = 8080
-        host = "0.0.0.0"
-        Handler = http.server.SimpleHTTPRequestHandler
-        # UTF-8
-        # Handler.extensions_map.update(
-        #     dict([(k, v + ';charset=UTF-8') \
-        #           for k, v in Handler.extensions_map.items()]))
-        httpd = socketserver.TCPServer((host, PORT), Handler)
-        http.allow_reuse_address = True
-        print("serving at http://{0}:{1}".format(host, PORT))
+        server_address = ('', 8080)
+        httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
         httpd.serve_forever()
 
 parser = argh.ArghParser()

@@ -7,3 +7,4 @@ __pycache__
 /.python_history
 /build/
 /.ipython
+/templates/assets/vendor/

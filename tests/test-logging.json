@@ -19,6 +19,11 @@
         "handlers": ["console"],
         "propagate": "no"
     },
+    "vcr": {
+        "level": "WARNING",
+        "handlers": ["console"],
+        "propagate": "no"
+    },
     "peewee": {
         "level": "WARNING",
         "handlers": ["console"],

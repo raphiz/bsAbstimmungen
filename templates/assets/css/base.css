@@ -1,0 +1,115 @@
+.ui.secondary.menu .header.item {
+    border: none;
+    font-size: 1.5rem;
+}
+
+.ui.secondary.menu .right {
+    padding-top: 0.6rem;
+}
+
+.ui.masthead {
+    margin-bottom: 0px;
+}
+
+.main.content {
+    margin-top: 2rem;
+}
+
+h2.options {
+    display: inline-block;
+}
+.comparison.options {
+    display: inline-block;
+    float:right;
+    margin-top: 1.33rem;
+}
+/* The main content area
+.main.container {
+  margin-top: 1rem;
+  background-color: #FFFFFF;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.05);
+  border: 1px solid #DDDDDD;
+  padding: 2em 2em 7em;
+  z-index: 1;
+}
+*/
+
+/* Section headers in the comparison view */
+.ui.table .section > td {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Proportions of the comparison tables */
+.ui.comparison.table td:nth-child(1) {
+    width: 20%;
+}
+.ui.comparison.table td:nth-child(2),
+.ui.comparison.table td:nth-child(3) {
+    width: 40%;
+}
+
+.opener h1 {
+    /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+    text-align: center;
+    color: white;
+    font-size: 4rem;
+    padding-top: 100px;
+}
+.opener {
+    height: 300px;
+    background: url(../images/basilisk.jpg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body{
+    background-color: #fff;
+}
+
+
+/*--------------
+     Away
+---------------*/
+.ui.table tr.away td,
+.ui.table td.away {
+  background: none repeat scroll 0% 0% #FFFBE6 !important;
+  color: #7d6c00 !important;
+}
+
+
+/*--------------
+     No
+---------------*/
+.ui.table tr.no td,
+.ui.table td.no {
+  background:none repeat scroll 0% 0% #FFF0F0 !important;
+  color: #CD2929 !important;
+}
+
+/*--------------
+     Yes
+---------------*/
+.ui.table tr.yes td,
+.ui.table td.yes {
+  background: none repeat scroll 0% 0% #EEFFE7 !important;
+  color: #3C763D !important;
+}
+
+
+/*
+ Add logo in front of the "Logo" text.
+*/
+.ui.secondary.menu {
+    /*content: "";
+    display: inline-block;
+    width: 1.5em;
+    height: 1rem;*/
+    background-image: url('../images/logo.png');
+    background-size: 1.3rem;
+    background-position: 0.3em;
+    background-repeat: no-repeat;
+    padding-left: 1rem;
+}
