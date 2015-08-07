@@ -34,7 +34,7 @@ def toUrl(value):
     for k, v in replacements.items():
         value = value.replace(k, v)
     if not re.fullmatch('[a-zA-Z_]*', value):
-        logger.warn('Found unsupported URL car in: ' + value)
+        logger.warn('Found unsupported URL char in: ' + value)
     return value.lower()
 
 

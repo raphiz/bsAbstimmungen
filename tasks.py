@@ -4,7 +4,7 @@
 from invoke import run, task
 from datetime import datetime
 import os
-
+from bsAbstimmungen.utils import setup_logging
 
 @task(name='import', help={
     'from-date': "The first date to importing data from (eg. 24.03.2015)",
@@ -23,6 +23,13 @@ def import_data(from_date, to_date):
 def serve(host='0.0.0.0', port=8080):
     from bsAbstimmungen import manage
     manage.serve(host, port)
+
+
+@task
+def clean():
+    if os.path.exists('build/'):
+        import shutil
+        shutil.rmtree('build/')
 
 
 @task
@@ -52,3 +59,13 @@ def release(push_tags=False):
         run('git push origin master --tags')
     else:
         print("Don't forget to push the tags (git push origin master --tags)!")
+
+
+# Setup logging
+if not os.path.exists('build/'):
+    os.makedirs('build/')
+setup_logging()
+
+import sys
+if not hasattr(sys, 'real_prefix'):
+    print('YOU ARE NOT RUNNING INSIDE A VIRTUAL ENV!')

@@ -1,8 +1,6 @@
 PyPDF2==1.24
-sqlalchemy==1.0.4
 requests==2.7.0
 beautifulsoup4==4.3.2
-peewee==2.6.1
-mysqlclient
-argh==0.26.1
+peewee==2.6.3
 jinja2==2.7.3
+invoke==0.10.1

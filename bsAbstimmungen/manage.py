@@ -9,13 +9,11 @@ import os
 import shutil
 from . import models
 from .importer.votingimporter import fetch
-from .utils import import_dump, dump_database, pushd, setup_logging
+from .utils import import_dump, dump_database, pushd
 from .render import renderer
 
 logger = logging.getLogger(__name__)
 filename = 'build/data.sql'
-
-setup_logging()
 
 
 def render():
