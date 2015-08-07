@@ -1,6 +1,6 @@
-PyPDF2==1.24
+PyPDF2==1.25.1
 requests==2.7.0
-beautifulsoup4==4.3.2
+beautifulsoup4==4.4.0
 peewee==2.6.3
-jinja2==2.7.3
+jinja2==2.8
 invoke==0.10.1
