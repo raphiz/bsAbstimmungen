@@ -30,7 +30,7 @@ def clean():
     if os.path.exists('build/'):
         import shutil
         shutil.rmtree('build/')
-
+    os.makedirs('build/')
 
 @task
 def render():
@@ -64,6 +64,7 @@ def release(push_tags=False):
 # Setup logging
 if not os.path.exists('build/'):
     os.makedirs('build/')
+
 setup_logging()
 
 import sys
