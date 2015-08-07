@@ -6,3 +6,5 @@ __pycache__
 /build/
 /templates/assets/vendor/
 /venv/
+/bsAbstimmungen.egg-info/
+/dist/
