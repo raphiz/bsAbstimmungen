@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 setup(
     name="bsAbstimmungen",
     version="0.1.0",
-    packages=['pyseries'],
+    packages=['bsAbstimmungen'],
     author="Raphael Zimmermann",
     author_email="dev@raphael.li",
     url="https://github.com/raphiz/bsAbstimmungen",

@@ -1,3 +1,4 @@
+bsAbstimmungen 0.1.0
 Stage 1
 x1. Implement relationships between councillor and fraction, votes, voting etc.
 x2. Work existing councillors / fractions
