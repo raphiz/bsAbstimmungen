@@ -7,10 +7,17 @@ import vcr
 import json
 
 
-def test_happy_path():
-    with vcr.use_cassette('build/fixtures/councillors.yaml'):
+def test_details():
+    url = 'http://www.grosserrat.bs.ch/de/mitglieder-gremien/mitglieder-a-z?such_kategorie=5&content_detail=3323'
+    with vcr.use_cassette('build/fixtures/councillor_details.yaml'):
         scraper = CouncillorScraper()
-        result = scraper.available_councillors()
+        result = scraper.details(url)
+
+
+def test_available():
+    with vcr.use_cassette('build/fixtures/available_councillors.yaml'):
+        scraper = CouncillorScraper()
+        result = scraper.available()
         verification = json.load(open(
             'tests/data/names.json'
         ))

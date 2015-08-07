@@ -3,8 +3,6 @@
 /test_cache/
 __pycache__
 *.pyc
-/.bash_history
-/.python_history
 /build/
-/.ipython
 /templates/assets/vendor/
+/venv/

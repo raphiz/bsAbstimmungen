@@ -21,6 +21,18 @@ class Fraction(BaseModel):
     abbrevation = peewee.CharField(max_length=10)
 
 
+GROUP_TYPES = ('private', 'public', 'governmental')
+
+
+class Group(BaseModel):
+
+    id = peewee.PrimaryKeyField()
+    name = peewee.CharField()
+    kind = peewee.CharField(max_length=1, constraints=[
+        peewee.Check("kind in ('{0}')".format("','".join(GROUP_TYPES)))]
+    )
+
+
 class Councillor(BaseModel):
 
     id = peewee.PrimaryKeyField()
@@ -29,6 +41,12 @@ class Councillor(BaseModel):
     lastname = peewee.CharField(null=True)
     fraction = peewee.ForeignKeyField(Fraction, related_name='councillors')
     # votings = relationship("Voting", backref="councillor")
+
+
+class GroupMembership(BaseModel):
+    councillor = peewee.ForeignKeyField(Fraction, related_name='groups')
+    group = peewee.ForeignKeyField(Fraction, related_name='members')
+    comment = peewee.CharField()
 
 
 class Vote(BaseModel):
