@@ -8,7 +8,8 @@ import json
 
 
 def test_details():
-    url = 'http://www.grosserrat.bs.ch/de/mitglieder-gremien/mitglieder-a-z?such_kategorie=5&content_detail=3323'
+    url = ('http://www.grosserrat.bs.ch/de/mitglieder-gremien/'
+           'mitglieder-a-z?such_kategorie=5&content_detail=3323')
     with vcr.use_cassette('build/fixtures/councillor_details.yaml'):
         scraper = CouncillorScraper()
         result = scraper.details(url)

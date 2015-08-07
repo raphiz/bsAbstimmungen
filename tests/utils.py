@@ -12,6 +12,6 @@ def mockdb(fn):
     def inner():
         test_db = SqliteDatabase(':memory:')
         with test_database(test_db, models.BaseModel.__subclasses__()):
-            x =  fn()
+            x = fn()
         return x
     return inner
