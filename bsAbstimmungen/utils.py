@@ -2,6 +2,7 @@ import logging.config
 import logging
 import os
 import json
+import peewee
 from contextlib import contextmanager
 
 
@@ -30,6 +31,9 @@ def dump_database(database, filename):
 
 
 def import_dump(database, filename):
+    db = peewee.SqliteDatabase(':memory:')
+    database.initialize(db)
+
     with open(filename, 'r') as f:
         database.get_cursor().executescript(f.read())
 

@@ -2,10 +2,12 @@ import os
 import sys
 import peewee
 
-database = peewee.SqliteDatabase(':memory:', journal_mode='MEMORY')
+database = peewee.Proxy()
 
 
 def create_tables():
+    db = peewee.SqliteDatabase(':memory:')
+    database.initialize(db)
     database.connect()
     database.create_tables(BaseModel.__subclasses__(), safe=True)
 
