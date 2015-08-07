@@ -89,14 +89,14 @@ class CouncillorScraper():
 
         # Parlamentarische Vorstösse' # Anz. vorstösse + link
 
-# Check attrs her!
-        #     'Kommissionen', # -> string + link
-        #     'Arbeitgeber', # -> string
-        #     'Mitgliedschaften in F&uumlhrungs-; und Aufsichtsgremien', # -> string
-        #     'Mitgliedschaften in staatlichen, nicht durch den Grossen Rat gewählten Kommissionen', # -> string
-        #     'Parlamentarische Vorstösse' # Anz. vorstösse + link
-        # ]
-
+    # Check attrs her!
+    # 'Kommissionen', # -> string + link
+    # 'Arbeitgeber', # -> string
+    # 'Mitgliedschaften in F&uumlhrungs-; und Aufsichtsgremien', # -> string
+    # 'Mitgliedschaften in staatlichen, nicht durch den Grossen Rat gewählten \
+    #        Kommissionen', # -> string
+    # 'Parlamentarische Vorstösse' # Anz. vorstösse + link
+    # ]
 
     def available(self):
         ur = 'http://www.grosserrat.bs.ch/de/mitglieder-gremien/mitglieder-a-z'

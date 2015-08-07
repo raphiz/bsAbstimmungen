@@ -22,8 +22,10 @@ def render():
     councillors = Councillor.select()
     for councillor in councillors:
         name = 'grossraete/{0}/index'.format(toUrl(councillor.fullname))
-        render_page(env, 'councillor_details', name, councillor=councillor, title=councillor.fullname)
-    render_page(env, 'councillor_index', 'grossraete/index', councillors=councillors, title='Grossräte')
+        render_page(env, 'councillor_details', name,
+                    councillor=councillor, title=councillor.fullname)
+    render_page(env, 'councillor_index', 'grossraete/index',
+                     councillors=councillors, title='Grossräte')
 
     render_page(env, 'compare', 'vergleichen/index')
 

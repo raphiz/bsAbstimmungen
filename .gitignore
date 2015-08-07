@@ -8,3 +8,4 @@ __pycache__
 /venv/
 /bsAbstimmungen.egg-info/
 /dist/
+/.cache/

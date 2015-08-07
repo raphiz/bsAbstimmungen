@@ -6,6 +6,11 @@ from datetime import datetime
 import os
 from bsAbstimmungen.utils import setup_logging
 
+
+@task
+def test():
+    run('py.test tests/ --pep8 --cov bsAbstimmungen --cov-report term-missing')
+
 @task(name='import', help={
     'from-date': "The first date to importing data from (eg. 24.03.2015)",
     'to-date': "The last date to import data from (eg. 24.03.2015)"}
