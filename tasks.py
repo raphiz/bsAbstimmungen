@@ -2,6 +2,7 @@
 # coding=utf-8
 
 from invoke import run, task
+from invoke.util import log
 from datetime import datetime
 import os
 from bsAbstimmungen.utils import setup_logging
@@ -32,10 +33,22 @@ def serve(host='0.0.0.0', port=8080):
 
 @task
 def clean():
+    run('find . -name *.pyc -delete')
+    run('find . -name *.pyo -delete')
+    run('find . -name *~ -delete')
+    run('find . -name __pycache__ -delete')
+    run('find . -name .coverage -delete')
+    run('rm -rf dist/')
+    run('rm -rf .cache/')
+    run('rm -rf .eggs/')
+    run('rm -rf bsAbstimmungen.egg-info')
     if os.path.exists('build/'):
         import shutil
         shutil.rmtree('build/')
     os.makedirs('build/')
+
+    log.info('cleaned up')
+
 
 @task
 def render():

@@ -1,0 +1,6 @@
+---
+site_name: bsAbstimmungen Docs
+repo_url: https://github.com/raphiz/bsAbstimmungen
+dev_addr: "0.0.0.0:4000"
+theme: readthedocs
+docs_dir: docs
