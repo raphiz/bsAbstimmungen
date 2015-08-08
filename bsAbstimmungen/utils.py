@@ -12,6 +12,10 @@ def setup_logging(default_path='logging.json',
     """
         Setup logging configuration
     """
+    # Ensure the build directory exists..
+    if not os.path.exists('build/'):
+        os.makedirs('build/')
+
     path = default_path
     value = os.getenv(env_key, None)
     if value:

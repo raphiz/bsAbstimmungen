@@ -1,24 +1,27 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+import os
+import sys
+from datetime import datetime
+
 from invoke import run, task
 from invoke.util import log
-from datetime import datetime
-import os
+
 from bsAbstimmungen.utils import setup_logging
+from bsAbstimmungen import manage
 
 
 @task
 def test():
     run('py.test tests/ --pep8 --cov bsAbstimmungen --cov-report term-missing')
 
+
 @task(name='import', help={
     'from-date': "The first date to importing data from (eg. 24.03.2015)",
     'to-date': "The last date to import data from (eg. 24.03.2015)"}
 )
 def import_data(from_date, to_date):
-    from bsAbstimmungen import manage
-
     from_date = datetime.strptime(from_date, '%d.%m.%Y')
     to_date = datetime.strptime(to_date, '%d.%m.%Y')
 
@@ -27,7 +30,6 @@ def import_data(from_date, to_date):
 
 @task
 def serve(host='0.0.0.0', port=8080):
-    from bsAbstimmungen import manage
     manage.serve(host, port)
 
 
@@ -42,17 +44,12 @@ def clean():
     run('rm -rf .cache/')
     run('rm -rf .eggs/')
     run('rm -rf bsAbstimmungen.egg-info')
-    if os.path.exists('build/'):
-        import shutil
-        shutil.rmtree('build/')
-    os.makedirs('build/')
-
+    run('rm -rf build/')
     log.info('cleaned up')
 
 
 @task
 def render():
-    from bsAbstimmungen import manage
     manage.render()
 
 
@@ -80,11 +77,8 @@ def release(push_tags=False):
 
 
 # Setup logging
-if not os.path.exists('build/'):
-    os.makedirs('build/')
-
 setup_logging()
 
-import sys
+# Warn the user when not using virtualenv
 if not hasattr(sys, 'real_prefix'):
     print('YOU ARE NOT RUNNING INSIDE A VIRTUAL ENV!')
