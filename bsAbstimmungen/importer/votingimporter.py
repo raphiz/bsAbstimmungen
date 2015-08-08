@@ -49,7 +49,7 @@ class VotingScraper:
     def _fetch_votings(self, dates):
         result = []
         for date in dates:
-            soup = BeautifulSoup(self._page(date))
+            soup = BeautifulSoup(self._page(date), "html.parser")
             for link in soup.find_all('a'):
                 if re.match('^[0-9]*$', link.string):
                     result.append(self.BASE + link['href'])
@@ -58,7 +58,7 @@ class VotingScraper:
     def _fetch_meeting_dates(self, legislations, fromDate, toDate):
         result = []
         for legislation in legislations:
-            soup = BeautifulSoup(self._page(legislation))
+            soup = BeautifulSoup(self._page(legislation), "html.parser")
             for link in soup.find_all('a'):
                 if re.match('^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$', link.string):
                     date = self._date(link.string)
@@ -67,7 +67,7 @@ class VotingScraper:
         return result
 
     def _fetch_legislations(self, fromDate, toDate):
-        soup = BeautifulSoup(self._page('index_archiv_v2.php'))
+        soup = BeautifulSoup(self._page('index_archiv_v2.php'), "html.parser")
         result = []
         for span in soup.find_all('span'):
             link = span.find('a')

@@ -44,7 +44,7 @@ class CouncillorScraper():
         # Sanitize request from <br> tags
         txt = requests.get(url).text
         txt = re.sub('<[\/]?br>', '</br>', txt)
-        soup = BeautifulSoup(txt)
+        soup = BeautifulSoup(txt, "html.parser")
 
         data = {}
         # Look for these attributes in the Detailansicht
@@ -100,7 +100,7 @@ class CouncillorScraper():
 
     def available(self):
         ur = 'http://www.grosserrat.bs.ch/de/mitglieder-gremien/mitglieder-a-z'
-        soup = BeautifulSoup(requests.get(ur).text)
+        soup = BeautifulSoup(requests.get(ur).text, "html.parser")
         result = {}
         for councillor_li in soup.select('.ri_fe_miglieder_li'):
             direct = councillor_li.a['href']
