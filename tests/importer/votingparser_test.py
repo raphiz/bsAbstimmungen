@@ -44,8 +44,8 @@ def test_multiline_affairs():
             'von Tempo 30. Projektierung und Umsetzung von '
             'Massnahmen aus dem aktualisierten Tempo 30-Konzept '
             'sowie Bericht zu zehn Anzügen und zu zwei '
-            'Petitionen sowie Bericht der Kommissionsminderheit'
-            == vote.affair)
+            'Petitionen sowie Bericht der Kommissionsminderheit' ==
+            vote.affair)
 
 
 @mockdb
