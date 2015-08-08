@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import json
-from nose.tools import *
+import pytest
 from bsAbstimmungen.importer.votingimporter import VotingParser
 from bsAbstimmungen.models import *
 from bsAbstimmungen.exceptions import AlreadyImportedException
@@ -14,11 +14,8 @@ def test_raise_exception_when_alread_parsed():
     parser.parse(
         'tests/data/Abst_0205_20130109_111125_0003_0000_sa.pdf'
     )
-    assert_raises(
-        AlreadyImportedException,
-        parser.parse,
-        'tests/data/Abst_0205_20130109_111125_0003_0000_sa.pdf'
-    )
+    with pytest.raises(AlreadyImportedException) as excinfo:
+        parser.parse('tests/data/Abst_0205_20130109_111125_0003_0000_sa.pdf')
 
 
 @mockdb
@@ -32,26 +29,23 @@ def test_reuse_existing_councillors():
     )
 
     # Check the rough numbers
-    assert_equal(2, Vote.select().count())
-    assert_equal(124, Councillor.select().count())
+    assert 2 == Vote.select().count()
+    assert 124 == Councillor.select().count()
 
 
 @mockdb
 def test_multiline_affairs():
     parser = VotingParser()
-    parser.parse(
-        'tests/data/Abst_0205_20130109_111125_0003_0000_sa.pdf'
-    )
+    parser.parse('tests/data/Abst_0205_20130109_111125_0003_0000_sa.pdf')
     vote = Vote.select()[0]
-    assert_equal('Bericht der Umwelt-, Verkehrs- und '
-                 'Energiekommission zum Ratschlag Nr. 12.0788.01 '
-                 'Rahmenausgabenbewilligung zur weiteren Umsetzung '
-                 'von Tempo 30. Projektierung und Umsetzung von '
-                 'Massnahmen aus dem aktualisierten Tempo 30-Konzept '
-                 'sowie Bericht zu zehn Anzügen und zu zwei '
-                 'Petitionen sowie Bericht der Kommissionsminderheit',
-                 vote.affair
-                 )
+    assert ('Bericht der Umwelt-, Verkehrs- und '
+            'Energiekommission zum Ratschlag Nr. 12.0788.01 '
+            'Rahmenausgabenbewilligung zur weiteren Umsetzung '
+            'von Tempo 30. Projektierung und Umsetzung von '
+            'Massnahmen aus dem aktualisierten Tempo 30-Konzept '
+            'sowie Bericht zu zehn Anzügen und zu zwei '
+            'Petitionen sowie Bericht der Kommissionsminderheit'
+            == vote.affair)
 
 
 @mockdb
@@ -62,9 +56,9 @@ def test_parser_extracts_data():
     )
 
     # Check the rough numbers
-    assert_equal(1, Vote.select().count())
-    assert_equal(100, Councillor.select().count())
-    assert_equal(8, Fraction.select().count())
+    assert 1 == Vote.select().count()
+    assert 100 == Councillor.select().count()
+    assert 8 == Fraction.select().count()
 
     # Load verification details
     verification = json.load(open(
@@ -73,21 +67,20 @@ def test_parser_extracts_data():
 
     # Verify the imported vote
     vote = Vote.select()[0]
-    assert_equal(verification['vote']['timestamp'],
-                 vote.timestamp.isoformat())
-    assert_equal(verification['vote']['nr'], vote.nr)
-    assert_equal(verification['vote']['affair'], vote.affair)
-    assert_equal(verification['vote']['proposal'], vote.proposal)
-    assert_equal(verification['vote']['question'], vote.question)
-    assert_equal(verification['vote']['type'], vote.type)
-    assert_equal(len(verification['votings']), 100)
+    assert verification['vote']['timestamp'] == vote.timestamp.isoformat()
+    assert verification['vote']['nr'] == vote.nr
+    assert verification['vote']['affair'] == vote.affair
+    assert verification['vote']['proposal'] == vote.proposal
+    assert verification['vote']['question'] == vote.question
+    assert verification['vote']['type'] == vote.type
+    assert len(verification['votings']) == 100
 
     # Verify all counillors
     for councillor in verification['votings']:
         loaded = Voting.select()\
             .join(Councillor) \
             .where(Councillor.fullname == councillor['name'])[0]
-        assert_equal(councillor['name'], loaded.councillor.fullname)
-        assert_equal(councillor['fraction'],
-                     loaded.councillor.fraction.abbrevation)
-        assert_equal(councillor['voting'], loaded.voting)
+        assert councillor['name'] == loaded.councillor.fullname
+        assert (councillor['fraction'] ==
+                loaded.councillor.fraction.abbrevation)
+        assert councillor['voting'] == loaded.voting

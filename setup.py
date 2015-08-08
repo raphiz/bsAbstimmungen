@@ -20,7 +20,6 @@ setup(
     zip_safe=False,
     install_requires=open('./requirements.txt').read(),
     tests_require=open('./requirements-dev.txt').read(),
-    test_suite='nose.collector',
     classifiers=[
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.4',

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from nose.tools import *
 from bsAbstimmungen.importer.councillorimporter import CouncillorScraper
 import vcr
 import json
@@ -24,7 +23,7 @@ def test_available():
         ))
 
         all_names = result.keys()
-        assert_equals(100, len(all_names))
+        assert 100 == len(all_names)
 
         for expected in verification.values():
-            assert_true(expected in all_names)
+            assert expected in all_names

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from nose.tools import *
 from datetime import datetime
 from bsAbstimmungen.importer.votingimporter import VotingScraper
 import vcr
@@ -13,4 +12,4 @@ def test_happy_path():
         f = datetime(year=2014, month=2, day=1)
         scraper = VotingScraper()
         result = scraper.find(f, t)
-        assert_equal(29, len(result))
+        assert 29 == len(result)

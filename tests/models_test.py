@@ -1,4 +1,3 @@
-from nose.tools import *
 from datetime import datetime
 from bsAbstimmungen.models import *
 from .utils import mockdb
