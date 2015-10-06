@@ -2,6 +2,6 @@
     "name": "raphiz/bsabstimmungen",
     "dependencies": {
         "jquery": "2.1.4",
-        "semantic-ui": "2.0.7"
+        "semantic-ui": "2.0.8"
     }
 }
