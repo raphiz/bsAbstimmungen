@@ -65,5 +65,5 @@ def test_available():
         all_names = result.keys()
         assert 100 == len(all_names)
 
-        for expected in verification.values():
-            assert expected in all_names
+        for expected in all_names:
+            assert expected in verification.values()
