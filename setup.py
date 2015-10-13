@@ -22,7 +22,7 @@ setup(
     tests_require=open('./requirements-dev.txt').read(),
     classifiers=[
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         "Programming Language :: Python :: Implementation :: CPython",
         'Development Status :: 4 - Beta',
     ],

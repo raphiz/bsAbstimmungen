@@ -1,5 +1,4 @@
 from . import utils
-from ..models import *
 from datetime import datetime
 import os
 import re
@@ -11,13 +10,13 @@ from ..exceptions import ParserException, AlreadyImportedException
 logger = logging.getLogger(__name__)
 
 
-def fetch(fromDate, toDate, directory='build/cache'):
+def fetch(db, fromDate, toDate, directory='build/cache'):
     scraper = VotingScraper()
     logger.info('Searching for votes....')
     docs = scraper.find(fromDate, toDate)
     logger.info('Found {0} votes'.format(len(docs)))
     saved = _download(docs, directory)
-    parser = VotingParser()
+    parser = VotingParser(db)
     for current in saved:
         try:
             parser.parse(current)
@@ -109,12 +108,20 @@ class VotingParser:
 
     lines = None
 
+    def __init__(self, db):
+        self.db = db
+
     def parse(self, file):
-        # TODO: skip if already parsed!
         self.idx = -1
+
+        basename = os.path.basename(file)
+        if self.db['votes'].find({'source': basename}).count() > 0:
+            raise AlreadyImportedException(
+                'The vote from source {0} is already imported'.format(basename))
+
         self.lines = utils.get_pdf_content(file)
 
-        vote = self._parseVote()
+        vote = self._parseVote(basename)
 
         for i in range(0, 100):
             self._parseVoting(vote)
@@ -126,64 +133,55 @@ class VotingParser:
         fullname = match.group(1)
         fraction = match.group(2)
 
-        councillor = self._get_councillor_for(fullname, fraction)
-        voting = Voting.create(
-            vote=vote,
-            councillor=councillor,
-            voting=self.enum_mapping.get(self.token(), None)
-        )
+        self._create_councillor_if_not_exists(fullname, fraction)
+        self.db['councillors'].update_one(
+            {'fullname': fullname, 'fraction': fraction},
+            {'$push': {'votings': {
+                    'vote': vote['_id'],
+                    'voting': self.enum_mapping.get(self.token(), None)
+                }}
+             })
 
-    def _get_fraction_for(self, abbrevation):
-        query = Fraction.select().where(Fraction.abbrevation == abbrevation)
-        if(query.count() == 0):
-            fraction = Fraction.create(abbrevation=abbrevation)
-            return fraction
-        return query[0]
+    def _create_councillor_if_not_exists(self, fullname, fraction):
+        councillor = self.db['councillors'].find_one({"fullname": fullname})
+        if councillor is None:
+            councillor = {"fullname": fullname, "fraction": fraction, "votings": []}
+            self.db['councillors'].insert(councillor)
 
-    def _get_councillor_for(self, fullname, fraction):
-        query = Councillor.filter(Councillor.fullname == fullname)
-        if(query.count() == 0):
-            councillor = Councillor.create(
-                fullname=fullname,
-                fraction=self._get_fraction_for(fraction))
-            return councillor
-        return query[0]
-
-    def _parseVote(self):
-        vote = Vote()
+    def _parseVote(self, basename):
+        vote = {
+            'source': basename
+        }
 
         self._assertToken('Grosser Rat des Kantons Basel-Stadt')
         self._assertToken('Ratssekretariat')
         self._assertToken('Nr')
 
-        vote.nr = self.token()
-        vote.timestamp = datetime.strptime(
+        vote['nr'] = int(self.token())
+        vote['timestamp'] = datetime.strptime(
             '%s %s' % (self.token(), self.token()),
             '%d.%m.%Y %H:%M:%S'
         )
-        vote.type = self.token()
+        vote['type'] = self.token()
 
-        exists = Vote.select() \
-            .where(Vote.nr == vote.nr) \
-            .where(Vote.timestamp == vote.timestamp) \
-            .count()
+        query = self.db['votes'].find(
+            {'nr': vote['nr'], 'timestamp': vote['timestamp']})
 
-        if(exists > 0):
+        if query.count() > 0:
             raise AlreadyImportedException(
-                'The vote nr %s from %s is already imported' %
-                (vote.nr, vote.timestamp)
-            )
+                'The vote nr {0} from {1} is already imported'.format(
+                 vote['nr'], vote['timestamp']))
 
         self._assertToken('Ergebnis der Abstimmung')
         self._assertToken('Geschäft')
 
-        vote.affair = self._parseUntil('Gegenstand / Antrag')
-        vote.proposal = self._parseUntil('Abstimmungsfrage')
+        vote['affair'] = self._parseUntil('Gegenstand / Antrag')
+        vote['proposal'] = self._parseUntil('Abstimmungsfrage')
 
-        vote.question = self._parseUntil('([^\(\)\s]*\s)*\([A-Z]*\)', True)
+        vote['question'] = self._parseUntil('([^\(\)\s]*\s)*\([A-Z]*\)', True)
         self._step_back()
 
-        vote.save()
+        self.db['votes'].insert(vote)
         return vote
 
     def _parseUntil(self, stopper, regex=False):

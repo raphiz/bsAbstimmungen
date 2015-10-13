@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
 <ul>
+
 {% for councillor in councillors %}
     <li><a href="{{ councillor.fullname | toUrl }}">{{ councillor.fullname | forceescape }}</a></li>
 {% endfor %}

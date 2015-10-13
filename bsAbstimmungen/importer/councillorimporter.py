@@ -5,7 +5,6 @@ import datetime
 import json
 import logging
 import os
-from ..models import *
 import re
 
 
@@ -13,64 +12,23 @@ logger = logging.getLogger(__name__)
 
 
 class CouncillorImporter():
+    def __init__(self, db):
+        self.db = db
 
     def parse(self):
         names = self.available()
-        for councillor in Councillor.select():
-            real_name = self.name_for(councillor.fullname, names.keys())
+        for councillor in self.db['councillors'].find():
+            real_name = self.name_for(councillor['fullname'], names.keys())
             # Skip if no mapping found
             if real_name is None:
                 continue
 
-            # TODO: adapt to support 'updates' - eg. if one leaves an organisation / comission
+            # TODO: adapt to support 'updates' - eg.
+            # if one leaves an organisation / comission
             url = names[real_name]
-            details = self.details(url)
+            details = self.details(url, councillor)
+            self.db['councillors'].replace_one({'_id': councillor['_id']}, councillor)
 
-            attrs = ['firstname', 'lastname', 'zip', 'title', 'phone_business',
-                     'phone_mobile', 'phone_private', 'fax_business',
-                     'fax_private', 'job', 'locality', 'birthdate', 'employer',
-                     'website', 'address']
-
-            for attr in attrs:
-                if attr in details:
-                    setattr(councillor,  attr, details[attr])
-
-            for commission in details['commissions']:
-                # TODO: check if comission is already atached to the councillor
-                match = re.fullmatch(
-                    '(.*)\s\(([A-Z]*)\)\sseit\s(\d{2}\.\d{2}\.\d{4})',
-                    commission)
-                commission = self._get_commission_for(
-                    match.group(1), match.group(2))
-                member_since = datetime.datetime.strptime(
-                    match.group(3), '%d.%m.%Y').date()
-
-                GroupMembership.create(
-                    councillor=councillor,
-                    group=commission,
-                    member_since=member_since
-                )
-            for commission in details['commissions']:
-                # TODO: check if comission is already atached to the councillor
-                match = re.fullmatch(
-                    '(.*)\s\(([A-Z]*)\)\sseit\s(\d{2}\.\d{2}\.\d{4})',
-                    commission)
-                commission = self._get_commission_for(
-                    match.group(1), match.group(2))
-                member_since = datetime.datetime.strptime(
-                    match.group(3), '%d.%m.%Y').date()
-
-                GroupMembership.create(
-                    councillor=councillor,
-                    group=commission,
-                    member_since=member_since
-                )
-            # TODO: member_nonstate
-            # TODO: member_state
-
-            councillor.save()
-
-            # print(json.dumps(details))
     def _get_commission_for(self, name, abbrevation):
         q = Group.select().where(Group.kind == 'commission',
                                  Group.abbrevation == abbrevation)
@@ -96,16 +54,17 @@ class CouncillorImporter():
                         'consider adding it to the mapping.json'.format(given))
             return None
 
-    def details(self, url):
-        # This allows us to access the email
-        url = url + '&showemail=1'
+    def details(self, url, councillor):
+        # This would allow accessing the email
+        # url = url + '&showemail=1'
+
+        councillor['source'] = url
 
         # Sanitize request from <br> tags
         txt = requests.get(url).text
         txt = re.sub('<[\/]?br>', '</br>', txt)
         soup = BeautifulSoup(txt, "html.parser")
 
-        data = {}
         # Look for these attributes in the Detailansicht
         attributes = {"lastname": "Name", "firstname": "Vorname",
                       "address": "Adresse", "zip": "PLZ", "locality": "Ort",
@@ -120,50 +79,51 @@ class CouncillorImporter():
         for attribute, label in attributes.items():
             td = dtable.find(text=label)
             if not td:
+                councillor[attribute] = None
                 continue
-            value = td.parent.parent.contents[1].string
-            data[attribute] = value
+            councillor[attribute] = td.parent.parent.contents[1].string
 
         # Convert birthdate into date field
-        data['birthdate'] = datetime.datetime.strptime(
-            data['birthdate'], '%d.%m.%Y').date()
+        councillor['birthdate'] = datetime.datetime.strptime(
+            councillor['birthdate'], '%d.%m.%Y')
 
         # Parse fraction
         fraction_c = soup.find('h4', text='Fraktion').next_sibling
-        data['fraction'] = re.search('\(([A-Z\/]*)\)',
-                                     fraction_c.string).group(1)
+        councillor['fraction'] = re.search('\(([A-Z\/]*)\)',
+                                           fraction_c.string).group(1)
 
         # Parse commissions
         p_commissions = self._parse_contents(
             soup, 'h4', 'Kommissionen').split('\n')
         commissions = []
         for idx in range(0, len(p_commissions), 2):
-            commissions.append(p_commissions[idx] + p_commissions[idx+1])
-        data['commissions'] = commissions
+            commissions.append(p_commissions[idx])
+        councillor['commissions'] = commissions
 
         # Parse employer
-        data['employer'] = self._parse_contents(soup, 'h4', 'Arbeitgeber')
+        councillor['employer'] = self._parse_contents(soup, 'h4',
+                                                      'Arbeitgeber')
 
         #  Parse Membership in Leading and supervisor committies
         member_nonstate = self._parse_contents(
             soup, 'h4',
             'Mitgliedschaften in F&uumlhrungs-; und Aufsichtsgremien')
-        data['member_nonstate'] = [item
-                                   for item
-                                   in member_nonstate.split('\n')
-                                   if len(item.strip()) > 0]
+        councillor['member_nonstate'] = [item
+                                         for item
+                                         in member_nonstate.split('\n')
+                                         if len(item.strip()) > 0]
 
         #  Parse Membership in Leading and supervisor committies
         member_state = self._parse_contents(
             soup, 'h4', 'Mitgliedschaften in staatlichen, nicht durch '
             'den Grossen Rat gewählten Kommissionen')
-        data['member_state'] = [item
-                                for item
-                                in member_state.split('\n')
-                                if len(item.strip()) > 0]
+        councillor['member_state'] = [item
+                                      for item
+                                      in member_state.split('\n')
+                                      if len(item.strip()) > 0]
 
         # Parlamentarische Vorstösse' # Anz. vorstösse + link
-        return data
+        return councillor
 
     def available(self):
         ur = 'http://www.grosserrat.bs.ch/de/mitglieder-gremien/mitglieder-a-z'

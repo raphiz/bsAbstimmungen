@@ -3,29 +3,31 @@
 
 import logging
 from datetime import datetime
+from pymongo import MongoClient
 import http.server
 import socketserver
 import os
 import shutil
-from . import models
 from .importer.votingimporter import fetch
-from .utils import import_dump, dump_database, pushd
+from .utils import pushd
 from .render import renderer
 
 logger = logging.getLogger(__name__)
-filename = 'build/data.sql'
+
+
+client = MongoClient('localhost', 27017)
+db = client.bsabstimmungen
 
 
 def render():
-    if not os.path.exists(filename):
-        logger.error('There is no data to render!')
+    # TODO: check if DB is empty!
+
     # Flush existing dir
     if os.path.exists('build/site'):
         shutil.rmtree('build/site')
 
     os.makedirs('build/site')
-    import_dump(models.database, filename)
-    renderer.render()
+    renderer.render(db)
 
 
 def serve(host='0.0.0.0', port=8080):
@@ -42,16 +44,5 @@ def serve(host='0.0.0.0', port=8080):
 
 
 def import_data(from_date, to_date):
-    if os.path.exists(filename):
-        logger.info('Importing existing data...')
-        import_dump(models.database, filename)
-    else:
-        logger.info('Setting up schema....')
-        models.create_tables()
-
     # Fetch the data....
-    fetch(from_date, to_date)
-
-    # Dump the imported data
-    logger.info('Exporting data...')
-    dump_database(models.database, filename)
+    fetch(db, from_date, to_date)

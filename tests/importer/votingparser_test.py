@@ -3,14 +3,12 @@
 import json
 import pytest
 from bsAbstimmungen.importer.votingimporter import VotingParser
-from bsAbstimmungen.models import *
 from bsAbstimmungen.exceptions import AlreadyImportedException
 from ..utils import mockdb
 
 
-@mockdb
-def test_raise_exception_when_alread_parsed():
-    parser = VotingParser()
+def test_raise_exception_when_alread_parsed(mockdb):
+    parser = VotingParser(mockdb)
     parser.parse(
         'tests/data/Abst_0205_20130109_111125_0003_0000_sa.pdf'
     )
@@ -18,9 +16,8 @@ def test_raise_exception_when_alread_parsed():
         parser.parse('tests/data/Abst_0205_20130109_111125_0003_0000_sa.pdf')
 
 
-@mockdb
-def test_reuse_existing_councillors():
-    parser = VotingParser()
+def test_reuse_existing_councillors(mockdb):
+    parser = VotingParser(mockdb)
     parser.parse(
         'tests/data/Abst_0205_20130109_111125_0003_0000_sa.pdf'
     )
@@ -29,15 +26,14 @@ def test_reuse_existing_councillors():
     )
 
     # Check the rough numbers
-    assert 2 == Vote.select().count()
-    assert 124 == Councillor.select().count()
+    assert 2 == mockdb['votes'].count()
+    assert 124 == mockdb['councillors'].count()
 
 
-@mockdb
-def test_multiline_affairs():
-    parser = VotingParser()
+def test_multiline_affairs(mockdb):
+    parser = VotingParser(mockdb)
     parser.parse('tests/data/Abst_0205_20130109_111125_0003_0000_sa.pdf')
-    vote = Vote.select()[0]
+    vote = mockdb['votes'].find()[0]
     assert ('Bericht der Umwelt-, Verkehrs- und '
             'Energiekommission zum Ratschlag Nr. 12.0788.01 '
             'Rahmenausgabenbewilligung zur weiteren Umsetzung '
@@ -45,20 +41,17 @@ def test_multiline_affairs():
             'Massnahmen aus dem aktualisierten Tempo 30-Konzept '
             'sowie Bericht zu zehn Anzügen und zu zwei '
             'Petitionen sowie Bericht der Kommissionsminderheit' ==
-            vote.affair)
+            vote['affair'])
 
 
-@mockdb
-def test_parser_extracts_data():
-    parser = VotingParser()
+def test_parser_extracts_data(mockdb):
+    parser = VotingParser(mockdb)
     parser.parse(
         'tests/data/Abst_0147_20130605_090518_0001_0000_ab.pdf'
     )
 
-    # Check the rough numbers
-    assert 1 == Vote.select().count()
-    assert 100 == Councillor.select().count()
-    assert 8 == Fraction.select().count()
+    assert 1 == mockdb['votes'].count()
+    assert 100 == mockdb['councillors'].count()
 
     # Load verification details
     verification = json.load(open(
@@ -66,21 +59,17 @@ def test_parser_extracts_data():
     ))
 
     # Verify the imported vote
-    vote = Vote.select()[0]
-    assert verification['vote']['timestamp'] == vote.timestamp.isoformat()
-    assert verification['vote']['nr'] == vote.nr
-    assert verification['vote']['affair'] == vote.affair
-    assert verification['vote']['proposal'] == vote.proposal
-    assert verification['vote']['question'] == vote.question
-    assert verification['vote']['type'] == vote.type
-    assert len(verification['votings']) == 100
+    vote = mockdb['votes'].find_one({'nr': verification['vote']['nr']})
+    assert verification['vote']['timestamp'] == vote['timestamp'].isoformat()
+    assert verification['vote']['affair'] == vote['affair']
+    assert verification['vote']['proposal'] == vote['proposal']
+    assert verification['vote']['question'] == vote['question']
+    assert verification['vote']['type'] == vote['type']
 
     # Verify all counillors
     for councillor in verification['votings']:
-        loaded = Voting.select()\
-            .join(Councillor) \
-            .where(Councillor.fullname == councillor['name'])[0]
-        assert councillor['name'] == loaded.councillor.fullname
-        assert (councillor['fraction'] ==
-                loaded.councillor.fraction.abbrevation)
-        assert councillor['voting'] == loaded.voting
+        loaded = mockdb['councillors'].find_one({'fullname':
+                                                 councillor['name']})
+        assert councillor['name'] == loaded['fullname']
+        assert councillor['fraction'] == loaded['fraction']
+        assert councillor['voting'] == loaded['votings'][0]['voting']

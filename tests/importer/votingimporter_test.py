@@ -3,13 +3,13 @@ from datetime import datetime
 from mock import patch
 import os
 import shutil
+from ..utils import mockdb
 
 
 @patch('bsAbstimmungen.importer.votingimporter.VotingScraper.find')
 @patch('bsAbstimmungen.importer.votingimporter.VotingParser.parse')
 @patch('bsAbstimmungen.importer.votingimporter.utils.download')
-def test_fetch(download, parse, find):
-    # importer = VotingImporter()
+def test_fetch(download, parse, find, mockdb):
 
     f = datetime(year=2014, month=2, day=1)
     t = datetime(year=2014, month=2, day=28)
@@ -20,7 +20,7 @@ def test_fetch(download, parse, find):
         'http://abstimmungen.grosserrat-basel.ch/archiv/Amtsjahr_2014-2015/'
         '2014.02.12/Abst_0493_20140212_114415_0017_0000_sa.pdf']
 
-    votingimporter.fetch(f, t, directory='test_cache')
+    votingimporter.fetch(mockdb, f, t, directory='test_cache')
 
     # Verify the scraper is called
     find.assert_called_with(f, t)

@@ -1,5 +1,4 @@
 from jinja2 import Environment, FileSystemLoader
-from ..models import *
 import os
 import shutil
 import logging
@@ -12,21 +11,26 @@ template_dir = 'templates/'
 destination_dir = 'build/site/'
 
 
-def render():
+def render(db):
     env = Environment(loader=FileSystemLoader(template_dir))
     env.filters['toUrl'] = toUrl
 
     # Copy resources
     shutil.copytree(template_dir + 'assets', destination_dir + 'assets')
 
-    councillors = Councillor.select()
-    for councillor in councillors:
-        name = 'grossraete/{0}/index'.format(toUrl(councillor.fullname))
-        render_page(env, 'councillor_details', name,
-                    councillor=councillor, title=councillor.fullname)
-    render_page(env, 'councillor_index', 'grossraete/index',
-                     councillors=councillors, title='Grossräte')
+    # Profile pages
+    councillors = db['councillors']
 
+    for councillor in councillors.find():
+        name = 'grossraete/{0}/index'.format(toUrl(councillor['fullname']))
+        render_page(env, 'councillor_details', name,
+                    councillor=councillor, title=councillor['fullname'])
+
+    # Index pages
+    render_page(env, 'councillor_index', 'grossraete/index',
+                     db=db, councillors=councillors.find(), title='Grossräte')
+
+    #  Base for comparison
     render_page(env, 'compare', 'vergleichen/index')
 
 
