@@ -4,18 +4,20 @@
 import logging
 from datetime import datetime
 from pymongo import MongoClient
+from vcr import VCR
 import http.server
 import socketserver
 import os
 import shutil
-from .importer.votingimporter import fetch
+from .importer import votingimporter
+from .importer.councillorimporter import CouncillorImporter
 from .utils import pushd
 from .render import renderer
 
 logger = logging.getLogger(__name__)
 
 
-client = MongoClient('localhost', 27017)
+client = MongoClient('127.0.0.1', 27017)
 db = client.bsabstimmungen
 
 
@@ -44,5 +46,12 @@ def serve(host='0.0.0.0', port=8080):
 
 
 def import_data(from_date, to_date):
-    # Fetch the data....
-    fetch(db, from_date, to_date)
+    logger.info("Starting Voting import")
+    votingimporter.fetch(db, from_date, to_date)
+    logger.info("Voting import complete")
+
+    logger.info("starting councillor import")
+    ci = CouncillorImporter(db)
+    my_vcr = VCR(cassette_library_dir='build/fixtures/councillors')
+    ci.parse()
+    logger.info("councillor import complete")

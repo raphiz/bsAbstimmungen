@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup, element
 from ..exceptions import ParserException, AlreadyImportedException
+from . import utils
 import requests
 import datetime
 import json
@@ -11,12 +12,17 @@ import re
 logger = logging.getLogger(__name__)
 
 
+# TODO: allow to make a diff
 class CouncillorImporter():
-    def __init__(self, db):
+    def __init__(self, db, avatar_directory='build/avatars'):
         self.db = db
+        self.avatar_directory = avatar_directory
+        if not os.path.exists(self.avatar_directory):
+            os.makedirs(self.avatar_directory)
 
     def parse(self):
         names = self.available()
+        logger.info("Found data for {0} councillors".format(len(names)))
         for councillor in self.db['councillors'].find():
             real_name = self.name_for(councillor['fullname'], names.keys())
             # Skip if no mapping found
@@ -87,17 +93,19 @@ class CouncillorImporter():
         councillor['birthdate'] = datetime.datetime.strptime(
             councillor['birthdate'], '%d.%m.%Y')
 
-        # Parse fraction
-        fraction_c = soup.find('h4', text='Fraktion').next_sibling
-        councillor['fraction'] = re.search('\(([A-Z\/]*)\)',
-                                           fraction_c.string).group(1)
+        # # Parse fraction
+        # fraction_c = soup.find('h4', text='Fraktion').next_sibling
+        # councillor['fraction'] = re.search('\(([A-Z\-\/]*)\)',
+        #                                    fraction_c.string).group(1)
 
         # Parse commissions
         p_commissions = self._parse_contents(
-            soup, 'h4', 'Kommissionen').split('\n')
+            soup, 'h4', 'Kommissionen')
         commissions = []
-        for idx in range(0, len(p_commissions), 2):
-            commissions.append(p_commissions[idx])
+        if p_commissions is not None:
+            p_commissions = p_commissions.split('\n')
+            for idx in range(0, len(p_commissions), 2):
+                commissions.append(p_commissions[idx])
         councillor['commissions'] = commissions
 
         # Parse employer
@@ -108,21 +116,31 @@ class CouncillorImporter():
         member_nonstate = self._parse_contents(
             soup, 'h4',
             'Mitgliedschaften in F&uumlhrungs-; und Aufsichtsgremien')
-        councillor['member_nonstate'] = [item
-                                         for item
-                                         in member_nonstate.split('\n')
-                                         if len(item.strip()) > 0]
+        c_member_nonstate = []
+        if member_nonstate is not None:
+            for item in member_nonstate.split('\n'):
+                if len(item.strip()) > 0:
+                    c_member_nonstate.append(item)
+        councillor['member_nonstate'] = c_member_nonstate
 
         #  Parse Membership in Leading and supervisor committies
         member_state = self._parse_contents(
             soup, 'h4', 'Mitgliedschaften in staatlichen, nicht durch '
             'den Grossen Rat gewählten Kommissionen')
-        councillor['member_state'] = [item
-                                      for item
-                                      in member_state.split('\n')
-                                      if len(item.strip()) > 0]
+        c_member_state = []
+        if member_state is not None:
+            for item in member_state.split('\n'):
+                if len(item.strip()) > 0:
+                    c_member_state.append(item)
+        councillor['member_state'] = c_member_state
 
-        # Parlamentarische Vorstösse' # Anz. vorstösse + link
+        # Download avatar
+        avatar_url = soup.findAll(attrs={"title": "Grosses Bild anzeigen"})[0]['href']
+        avatar_url = 'http://www.grosserrat.bs.ch/' + avatar_url
+        councillor['avatar'] = avatar_url[avatar_url.rindex('/')+1:]
+        dst = os.path.join(self.avatar_directory, councillor['avatar'])
+        utils.download(avatar_url, dst)
+
         return councillor
 
     def available(self):
@@ -139,6 +157,8 @@ class CouncillorImporter():
 
     def _parse_contents(self, soup, heading, text):
         its = soup.find(heading, text=text)
+        if its is None:
+            return None
         val = ''
         for it in its.next_siblings:
             if type(it) is element.Tag and it.name[:1] == 'h':

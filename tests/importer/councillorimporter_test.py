@@ -1,5 +1,6 @@
 from bsAbstimmungen.importer.councillorimporter import CouncillorImporter
 import vcr
+import os
 from ..utils import mockdb
 import json
 import datetime
@@ -24,8 +25,9 @@ def test_importer(mockdb):
     mockdb['councillors'].insert({'fullname': 'Ruedi Rechsteiner',
                                   'fraction': 'SP', 'votings': []})
 
-    importer = CouncillorImporter(mockdb)
-    importer.parse()
+    with vcr.use_cassette('build/fixtures/councillor.yaml'):
+        importer = CouncillorImporter(mockdb)
+        importer.parse()
 
     ruedi = mockdb['councillors'].find_one({'fullname': 'Ruedi Rechsteiner'})
 
@@ -52,6 +54,9 @@ def test_importer(mockdb):
 
     assert 1 == len(ruedi['member_state'])
     assert 5 == len(ruedi['member_nonstate'])
+
+    # Verify the avatar was downloaded
+    assert os.path.exists(os.path.join('build/avatars', str(ruedi['avatar'])))
 
 
 def test_available():

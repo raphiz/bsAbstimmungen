@@ -1,9 +1,26 @@
 {% extends "base.html" %}
 {% block body %}
 <ul>
-
+<div class="ui five cards">
 {% for councillor in councillors %}
-    <li><a href="{{ councillor.fullname | toUrl }}">{{ councillor.fullname | forceescape }}</a></li>
+  <a href="{{ councillor.fullname | toUrl }}" class="card">
+    <div class="image">
+      <img src="{{ '/avatars/'+councillor.avatar if councillor.avatar else '/assets/images/avatar.jpg' }}">
+    </div>
+    <div class="content">
+      <div class="header">
+          {{ councillor.firstname | forceescape }} {{ councillor.lastname | forceescape }}
+      </div>
+     </div>
+     <div class="extra content">
+          <span class="left floated like">
+             {{ councillor.fraction}}
+           </span>
+           <span class="right floated star">
+             {{ councillor.ward or '?'}}
+           </span>
+     </div>
+ </a>
 {% endfor %}
-</ul>
+</div>
 {% endblock %}

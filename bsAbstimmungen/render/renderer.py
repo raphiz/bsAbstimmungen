@@ -17,6 +17,7 @@ def render(db):
 
     # Copy resources
     shutil.copytree(template_dir + 'assets', destination_dir + 'assets')
+    shutil.copytree('build/avatars', destination_dir + 'avatars')
 
     # Profile pages
     councillors = db['councillors']
