@@ -1,26 +1,25 @@
-{% extends "base.html" %}
-{% block body %}
+{% extends "base.html" %} {% block body %}
 <ul>
-<div class="ui five cards">
-{% for councillor in councillors %}
-  <a href="{{ councillor.fullname | toUrl }}" class="card">
-    <div class="image">
-      <img src="{{ '/avatars/'+councillor.avatar if councillor.avatar else '/assets/images/avatar.jpg' }}">
+    <div class="ui five cards">
+        {% for councillor in councillors %}
+        <a href="{{ councillor.fullname | toUrl }}" class="card">
+            <div class="image">
+                <img src="{{ '/avatars/'+councillor.avatar if councillor.avatar else '/assets/images/avatar.jpg' }}">
+            </div>
+            <div class="content">
+                <div class="header">
+                    {{ councillor.firstname | forceescape }} {{ councillor.lastname | forceescape }}
+                </div>
+            </div>
+            <div class="extra content">
+                <span class="left floated like">
+                    {{ councillor.fraction}}
+                </span>
+                <span class="right floated star">
+                    {{ councillor.ward or '?'}}
+                </span>
+            </div>
+        </a>
+        {% endfor %}
     </div>
-    <div class="content">
-      <div class="header">
-          {{ councillor.firstname | forceescape }} {{ councillor.lastname | forceescape }}
-      </div>
-     </div>
-     <div class="extra content">
-          <span class="left floated like">
-             {{ councillor.fraction}}
-           </span>
-           <span class="right floated star">
-             {{ councillor.ward or '?'}}
-           </span>
-     </div>
- </a>
-{% endfor %}
-</div>
-{% endblock %}
+    {% endblock %}

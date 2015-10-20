@@ -14,7 +14,7 @@ from bsAbstimmungen import manage
 
 @task
 def test():
-    run('py.test --pep8 --cov bsAbstimmungen --cov-report term-missing')
+    run('py.test --pep8 --cov bsAbstimmungen')
 
 
 @task(name='import', help={

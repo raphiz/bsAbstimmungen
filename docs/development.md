@@ -8,7 +8,6 @@ virtualenv-3.5 venv
 source venv/bin/activate
 # Install requirements
 pip install -r requirements.txt
-pip install -r requirements-dev.txt
 bower install
 ```
 
