@@ -21,4 +21,4 @@ notifications:
     email: true
 
 after_success:
-    coveralls
+    codecov
