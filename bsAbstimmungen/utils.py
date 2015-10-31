@@ -2,8 +2,9 @@ import logging.config
 import logging
 import os
 import json
-# import peewee
+import http.server
 from contextlib import contextmanager
+from watchdog.events import FileSystemEventHandler
 
 
 def setup_logging(default_path='logging.json',
@@ -27,19 +28,37 @@ def setup_logging(default_path='logging.json',
     else:
         logging.basicConfig(level=default_level)
 
-#
-# def dump_database(database, filename):
-#     with open(filename, 'w') as buffer:
-#         for line in database.get_conn().iterdump():
-#             buffer.write('%s\n' % line)
-#
-#
-# def import_dump(database, filename):
-#     db = peewee.SqliteDatabase(':memory:')
-#     database.initialize(db)
-#
-#     with open(filename, 'r') as f:
-#         database.get_cursor().executescript(f.read())
+
+class WatchdogHandler(FileSystemEventHandler):
+
+    def __init__(self, context, action):
+        super(WatchdogHandler, self).__init__()
+        self._action = action
+        self._context = context
+
+    def on_any_event(self, event):
+        if event.is_directory:
+            return
+        self._action(self._context, getattr(event, 'dest_path', event.src_path))
+
+
+class StoppableServer(http.server.HTTPServer):
+
+    stopped = False
+    paused = False
+
+    def __init__(self, *args, **kw):
+        super(StoppableServer, self).__init__(*args, **kw)
+
+    def serve_forever(self):
+        while not self.stopped:
+            while not self.paused:
+                self.handle_request()
+            sleep(0.5)
+
+    def force_stop(self):
+        self.server_close()
+        self.stopped = True
 
 
 @contextmanager
