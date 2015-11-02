@@ -1,3 +1,19 @@
+.proposal{
+  font-weight:normal;
+}
+
+.ui.feed > .event > .label .icon.yes {
+    color: green;
+}
+.ui.feed > .event > .label .icon.no {
+    color: red;
+}
+.feedback {
+  position: fixed;
+  bottom: 0;
+  right: 1rem;
+}
+
 .ui.secondary.menu .header.item {
     border: none;
     font-size: 1.5rem;

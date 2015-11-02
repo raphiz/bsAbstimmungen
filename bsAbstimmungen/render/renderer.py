@@ -22,10 +22,17 @@ def render(db):
     # Profile pages
     councillors = db['councillors']
 
+    votes_mapping = db['votes'].find()
+    votes_mapping = {curr["_id"]: curr for curr in votes_mapping}
+    # for m in votes_mapping:
+    #     print(m)
+    # print(votes_mapping)
+
     for councillor in councillors.find():
         name = 'grossraete/{0}/index'.format(toUrl(councillor['fullname']))
         render_page(env, 'councillor_details', name,
-                    councillor=councillor, title=councillor['fullname'])
+                    councillor=councillor, votes_mapping=votes_mapping,
+                    title=councillor['fullname'])
 
     # Index pages
     render_page(env, 'councillor_index', 'grossraete/index',

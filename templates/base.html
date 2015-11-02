@@ -1,58 +1,66 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        {% block head %}
-        <!-- Standard Meta -->
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-        <!-- Site Properities -->
-        <title>{{ title }} - Basel-Transparent</title>
+<head>
+    {% block head %}
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-        <link rel="stylesheet" type="text/css" href="/assets/vendor/semantic-ui/dist/semantic.css">
-        <link rel="stylesheet" type="text/css" href="/assets/css/base.css">
-        {% endblock %}
+    <!-- Site Properities -->
+    <title>{{ title }} - Basel-Transparent</title>
 
-    </head>
-    <body id="home">
-        <div class="ui masthead segment">
-            <div class="ui page grid">
-                <div class="column">
-                    <div class="ui secondary menu">
-                        <div class="header item">
-                            <i class="logo"></i>Basel Transparent
-                        </div>
-                        <div class="right menu">
-                            <a href="/grossraete" class="item">Grossräte</a>
-                            <a class="item">Fraktionen</a>
-                            <a class="item">Abstimmungen</a>
-                            <a href="/vergleichen" class="item">Vergleichen</a>
-                        </div>
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/semantic-ui/dist/semantic.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/base.css"> {% endblock %}
+
+</head>
+
+<body id="home">
+    <div class="ui masthead segment">
+        <div class="ui page grid">
+            <div class="column">
+                <div class="ui secondary menu">
+                    <div class="header item">
+                        <i class="logo"></i>Basel Transparent
+                    </div>
+                    <div class="right menu">
+                        <a href="/grossraete" class="item">Grossräte</a>
+                        <a class="item">Fraktionen</a>
+                        <a class="item">Abstimmungen</a>
+                        <a href="/vergleichen" class="item">Vergleichen</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="opener">
-            <h1>{{ title }}</h1>
+    <div class="opener">
+        <h1>{{ title }}</h1>
+    </div>
+
+    <div class="ui page grid">
+        <div class="column main content">
+            {% block body %}{% endblock %}
         </div>
+    </div>
 
-        <div class="ui page grid">
-            <div class="column main content">
-                {% block body %}{% endblock %}
-            </div>
+    <div class="ui page grid">
+        <div class="column ">
+            Über Basel Transparent &middot; Mitmachen &middot; Hilfe / FAQ &middot; News
         </div>
+    </div>
+    <div class="feedback">
+        <a href="/vergleichen" class="ui right button">
+            Feedback
+            <i class="right announcement icon"></i>
+        </a>
+    </div>
+    {% block footer %}
+    <script src="/assets/vendor/jquery/dist/jquery.js"></script>
+    <script src="/assets/vendor/semantic-ui/dist/semantic.js"></script>
+    {% endblock footer %}
 
-        <div class="ui page grid">
-            <div class="column ">
-                Über GrossratWatch &middot; Mitmachen &middot; Hilfe / FAQ &middot; News
-            </div>
-        </div>
+</body>
 
-        {% block footer %}
-            <script src="/assets/vendor/jquery/dist/jquery.js"></script>
-            <script src="/assets/vendor/semantic-ui/dist/semantic.js"></script>
-        {% endblock footer %}
-    </body>
 </html>

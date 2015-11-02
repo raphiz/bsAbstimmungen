@@ -1,83 +1,162 @@
-{% extends "base.html" %}
-{% block body %}
-<h1>{{ councillor.fullname }}</h1>
-<div class="overview row">
-    <div class="aside">
-        <img src="images/ballmer.jpg"></img>
-    </div>
-    <div class="left">
-        <h1 class="name">Mirjam Ballmer</h1>
-        <div class="role">
-            <span class="party">Gr&uuml;nes B&uuml;ndnis Basel</span>
-            <span class="committee">Mitglied in "Bau- und Raumplanungskommission"</span>
-            <span class="period">Seit 2011</span>
+{% extends "base.html" %} {% block body %}
+
+<div class="">
+
+    <div class="ui stackable grid">
+
+        <img class="three wide column" height="100%" src="{{ '/avatars/'+councillor.avatar if councillor.avatar else '/assets/images/avatar.jpg' }}">
+        <div class="nine wide column">
+            <h1>{{ councillor.fullname }}</h1>
+            <div class="meta">
+                <p>{{ councillor.fraction }}</p>
+                <p>{{ councillor.ward }}</p>
+                <p>{{ councillor.job }}</p>
+            </div>
+            <br>
+            <a href="/vergleichen" class="ui right primary button">
+                Vergleichen
+                <i class="right chevron icon"></i>
+            </a>
         </div>
-        <div class="stats">
-            <span class="attendance">89% <a href="#">Anwesend</a></span>
-            <span class="rebelling">99% <a href="#">Parteitreu</a></span>
+        <div class="four wide column">
+            <div class="ui horizontal statistics">
+                <div class="statistic">
+                    <div class="value">
+                        Na%
+                    </div>
+                    <div class="label">
+                        Anwesenheit
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="value">
+                        Na%
+                    </div>
+                    <div class="label">
+                        Parteitreue
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="value">
+                        Na
+                    </div>
+                    <div class="label">
+                        Abgegebene Stimmen
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui large feed">
+            {% for voting in councillor.votings %} {% set vote = votes_mapping[voting.vote] %}
+            <div class="event">
+                <div class="label">
+                  {% if voting.voting == 'yes' %}
+                      <i class="icon thumbs outline up yes" title="Ja"></i>
+                  {% elif voting.voting == 'no' %}
+                      <i class="icon thumbs outline down no" title="Nein"></i>
+                  {% elif voting.voting == 'abstain' %}
+                      <i class="icon meh" title="Enthalten"></i>
+                  {% elif voting.voting == 'away' %}
+                      <i class="icon plane" title="Abwesend"></i>
+                  {% elif voting.voting == 'president' %}
+                  <i class="icon legal" title="Präsident"></i>
+                  {% else %}
+                  <i class="icon help"></i>
+                  {% endif %}
+
+                </div>
+                <div class="content">
+                  <div class="summary">
+                    {{vote.affair}}
+                    <div class="date">
+                      3 days ago
+                    </div>
+                  </div>
+                  {% if vote.proposal %}
+                  <div class="extra text">
+                    {{ vote.proposal }}
+                  </div>
+                  {% endif %}
+                  <div class="meta">
+                    <a class="like">
+                      <i class="icon checkmark"></i> wurde angenommen
+                      <i class="icon minus"></i> wurde abgelehnt
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <!-- <tr>
+                <td>
+                    <p class="affair">{{vote.affair}}</p>
+                    <p class="proposal"></p>
+                </td>
+                <td class="{{ voting.voting }}">{{ voting.voting }}</td>
+            </tr> -->
+            {% endfor %}
         </div>
     </div>
-  </div>
 
 
+</div>
+
+<!--
 <div class="main">
-  <h2>K&uuml;rzliches Abstimmungsverhalten</h2>
-  <ul class="vote_list">
-    <li>
-        <span class="date">12 Februar 2015</span>
-        <span class="title">Ratschlag Areal Bank für Internationalen Zahlungsausgleich</span>
-        <span class="vote away">Mirjam Ballmer war abwesend</span>
-        <span class="result passed tooltip" data-tooltip="30 Ja – 15 Nein">Knapp Genehmigt</span>
-    </li>
-    <li>
-        <span class="date">12 Februar 2015</span>
-        <span class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
-        <span class="vote passed">Mirjam Ballmer hat zugestimmt</span>
-        <span class="result notpassed tooltip" data-tooltip="30 Ja – 15 Nein">Deutlich Abgelehnt</span>
-    </li>
-  </ul>
-  <p class="more"><a href="#">Alle ansehen</a></p>
+    <h2>K&uuml;rzliches Abstimmungsverhalten</h2>
+    <ul class="vote_list">
+        <li>
+            <span class="date">12 Februar 2015</span>
+            <span class="title">Ratschlag Areal Bank für Internationalen Zahlungsausgleich</span>
+            <span class="vote away">Mirjam Ballmer war abwesend</span>
+            <span class="result passed tooltip" data-tooltip="30 Ja – 15 Nein">Knapp Genehmigt</span>
+        </li>
+        <li>
+            <span class="date">12 Februar 2015</span>
+            <span class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
+            <span class="vote passed">Mirjam Ballmer hat zugestimmt</span>
+            <span class="result notpassed tooltip" data-tooltip="30 Ja – 15 Nein">Deutlich Abgelehnt</span>
+        </li>
+    </ul>
+    <p class="more"><a href="#">Alle ansehen</a></p>
 
-  <h2>Verpasset Abstimmungen</h2>
-  <ul class="vote_list">
-    <li>
-        <span class="date">12 Februar 2015</span>
-        <span class="title">Ratschlag Areal Bank für Internationalen Zahlungsausgleich</span>
-        <span class="result passed tooltip" data-tooltip="30 Ja – 15 Nein">Knapp Genehmigt</span>
-    </li>
-    <li>
-        <span class="date">12 Februar 2015</span>
-        <span class="title">Ratschlag Areal Bank für Internationalen Zahlungsausgleich</span>
-        <span class="result passed tooltip" data-tooltip="30 Ja – 15 Nein">Knapp Genehmigt</span>
-    </li>
-  </ul>
-  <p class="more"><a href="#">Alle ansehen</a></p>
+    <h2>Verpasset Abstimmungen</h2>
+    <ul class="vote_list">
+        <li>
+            <span class="date">12 Februar 2015</span>
+            <span class="title">Ratschlag Areal Bank für Internationalen Zahlungsausgleich</span>
+            <span class="result passed tooltip" data-tooltip="30 Ja – 15 Nein">Knapp Genehmigt</span>
+        </li>
+        <li>
+            <span class="date">12 Februar 2015</span>
+            <span class="title">Ratschlag Areal Bank für Internationalen Zahlungsausgleich</span>
+            <span class="result passed tooltip" data-tooltip="30 Ja – 15 Nein">Knapp Genehmigt</span>
+        </li>
+    </ul>
+    <p class="more"><a href="#">Alle ansehen</a></p>
 
-  <h2>Parteiuntre Abgestimmt</h2>
-  <ul class="vote_list">
-    <li>
-        <span class="date">12 Februar 2015</span>
-        <span class="title">Ratschlag Areal Bank für Internationalen Zahlungsausgleich</span>
-        <span class="vote party notpassed tooltip" data-tooltip="30 Ja – 15 Nein">Partei hat merheitlich abgelehnt</span>
-        <span class="vote passed">Mirjam Ballmer hat zugestimmt</span>
-        <span class="result notpassed tooltip" data-tooltip="30 Ja – 15 Nein">Knapp Abgelehnt</span>
-    </li>
-  </ul>
-  <p class="more"><a href="#">Alle ansehen</a></p>
+    <h2>Parteiuntre Abgestimmt</h2>
+    <ul class="vote_list">
+        <li>
+            <span class="date">12 Februar 2015</span>
+            <span class="title">Ratschlag Areal Bank für Internationalen Zahlungsausgleich</span>
+            <span class="vote party notpassed tooltip" data-tooltip="30 Ja – 15 Nein">Partei hat merheitlich abgelehnt</span>
+            <span class="vote passed">Mirjam Ballmer hat zugestimmt</span>
+            <span class="result notpassed tooltip" data-tooltip="30 Ja – 15 Nein">Knapp Abgelehnt</span>
+        </li>
+    </ul>
+    <p class="more"><a href="#">Alle ansehen</a></p>
 
-  <h2>&Auml;hndliche Grossr&auml;te</h2>
-  <table class="similar">
-      <tr>
-          <th class="match">&Uuml;bereinstimmung</th>
-          <th>Name</th>
-          <th>Partei</th>
-      </tr>
-      <tr>
-          <td>80%</td>
-          <td>Hans Meyer</td>
-          <td>Gr&uuml;ne</td>
-      </tr>
-  </table>
-<a href="compare.html" class="button">Vergleichen</a>
+    <h2>&Auml;hndliche Grossr&auml;te</h2>
+    <table class="similar">
+        <tr>
+            <th class="match">&Uuml;bereinstimmung</th>
+            <th>Name</th>
+            <th>Partei</th>
+        </tr>
+        <tr>
+            <td>80%</td>
+            <td>Hans Meyer</td>
+            <td>Gr&uuml;ne</td>
+        </tr>
+    </table> -->
 </div>
 {% endblock %}

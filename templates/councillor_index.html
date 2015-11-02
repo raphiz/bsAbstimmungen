@@ -8,7 +8,11 @@
             </div>
             <div class="content">
                 <div class="header">
-                    {{ councillor.firstname | forceescape }} {{ councillor.lastname | forceescape }}
+                    {% if councillor.firstname %}
+                        {{ councillor.firstname | forceescape }} {{ councillor.lastname | forceescape }}
+                    {% else %}
+                        {{ councillor.fullname }}
+                {% endif %}
                 </div>
             </div>
             <div class="extra content">
