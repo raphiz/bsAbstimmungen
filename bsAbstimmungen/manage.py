@@ -18,7 +18,7 @@ from .render import renderer
 logger = logging.getLogger(__name__)
 
 
-client = MongoClient('127.0.0.1', 27017)
+client = MongoClient('127.0.0.1', 27017, serverSelectionTimeoutMS=0)
 db = client.bsabstimmungen
 
 
